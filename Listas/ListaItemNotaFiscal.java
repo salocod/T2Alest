@@ -1,29 +1,29 @@
 package Listas;
 
-import Objects.Item;
+import Objects.ItemNotaFiscal;
 
-public class ListaSimplesmenteEncadeada {
+public class ListaItemNotaFiscal {
     private Nodo inicio;
     private Nodo fim;
     private int quantidade;
 
     class Nodo {
-        private Item item;
+        private ItemNotaFiscal item;
         private Nodo proximo;
 
-        public Nodo(Item item) {
+        public Nodo(ItemNotaFiscal item) {
             this.item = item;
             this.proximo = null;
         }
     }
 
-    public ListaSimplesmenteEncadeada() {
+    public ListaItemNotaFiscal() {
         quantidade =0;
         inicio = null;
         fim = null;
     }
 
-    public void adicionar(Item item) {
+    public void adicionar(ItemNotaFiscal item) {
         Nodo novoNodo = new Nodo(item);
         if(estaVazia()) {
             inicio = novoNodo;

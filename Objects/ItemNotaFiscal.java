@@ -1,12 +1,12 @@
 package Objects;
 
-public class Item {
+public class ItemNotaFiscal {
     private String itemNumero;
     private String descricao;
     private int quantidade;
     private double valorUnitario;
-    public Item proximo;
-    public Item(String itemNumero, String descricao, int quantidade, double valorUnitario) {
+    public ItemNotaFiscal proximo;
+    public ItemNotaFiscal(String itemNumero, String descricao, int quantidade, double valorUnitario) {
         this.itemNumero = itemNumero;
         this.descricao = descricao;
         this.quantidade = quantidade;

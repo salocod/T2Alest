@@ -27,24 +27,6 @@ public class ListaDuplamenteEncadeada {
         fim.anterior = inicio;
     }
 
-    public void adicionar(int posicao, NotaFiscal item) {
-        Nodo aux = inicio.proximo;
-        int p = 0;
-        while (aux != null) {
-            if (posicao == p) {
-                Nodo n = new Nodo(item);
-                n.proximo = aux;
-                n.anterior = aux.anterior;
-                aux.anterior.proximo = n;
-                aux.anterior = n;
-                quantidade++;
-                return;
-            }
-            aux = aux.proximo;
-            p++;
-        }
-    }
-
     public void removerDoFim() {
         if (fim != null) {
             if (fim.anterior != null) {
@@ -70,21 +52,18 @@ public class ListaDuplamenteEncadeada {
     }
 
     public void adicionar(NotaFiscal item) {
-        Nodo n = new Nodo(item);
-        if (buscar(item) == -1) {
+            Nodo n = new Nodo(item);
             fim.anterior.proximo = n;
             n.proximo = fim;
             n.anterior = fim.anterior;
             fim.anterior = n;
             quantidade++;
-        }
-
     }
 
     public void imprimirLista() {
-        Nodo atual = inicio;
+        Nodo atual = inicio.proximo;
         while (atual != null) {
-            System.out.println(atual.item);
+            System.out.println(atual.item.getNumero());
             atual = atual.proximo;
         }
     }
@@ -92,4 +71,6 @@ public class ListaDuplamenteEncadeada {
     public boolean estaVazia() {
         return (quantidade == 0);
     }
+
+    public int getQuantidade() {return quantidade;}
 }
