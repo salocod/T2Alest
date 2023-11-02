@@ -7,8 +7,8 @@ import java.io.PrintStream;
 import java.sql.Date;
 import java.util.Scanner;
 
-import Listas.ListaDuplamenteEncadeada;
 import Listas.ListaItemNotaFiscal;
+import Listas.ListaNotaFiscal;
 import Objects.ItemNotaFiscal;
 import Objects.NotaFiscal;
 
@@ -18,21 +18,22 @@ public class Leitura {
 
     public Leitura() {
         try {
-            bw = new BufferedReader(new FileReader("teste.csv"));
+            bw = new BufferedReader(new FileReader("notas_fiscais_10.csv"));
             PrintStream pw = new PrintStream(new File("dadosout.txt"));
             System.setOut(pw);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    // ListaDuplamenteEncadeada lista = new ListaDuplamenteEncadeada();
 
     public void executa() {
+
         String linha;
-        ListaDuplamenteEncadeada listaNf = new ListaDuplamenteEncadeada();
+        ListaNotaFiscal listaNf = new ListaNotaFiscal();
         try {
             bw.readLine();
             Scanner sc = new Scanner(bw.readLine()).useDelimiter("[|]");
+
             String numero = sc.next();
             Date data = Date.valueOf(sc.next());
             String cliente = sc.next();
@@ -42,16 +43,29 @@ public class Leitura {
             String estado = sc.next();
 
             NotaFiscal nf = new NotaFiscal();
-            
-            nf.setCliente(cliente);
             nf.setNumero(numero);
             nf.setData(data);
-            String notaAtual = numero;
-            String notaAnterior = notaAtual;
+            nf.setCliente(cliente);
+            nf.setCnpjCpf(cpf);
+            nf.setEndereco(end);
+            nf.setCidade(cidade);
+            nf.setEstado(estado);
             listaNf.adicionar(nf);
 
+            String notaAtual = numero;
+            String notaAnterior = notaAtual;
+            
             ListaItemNotaFiscal lista = new ListaItemNotaFiscal();
             nf.setItens(lista);
+
+            String numeroItem = sc.next();
+            String descricao = sc.next();
+            int quantidadeItem = sc.nextInt();
+            double valorUnitario = sc.nextDouble();
+            ItemNotaFiscal item = new ItemNotaFiscal(numeroItem, descricao, quantidadeItem, valorUnitario);
+            lista.adicionar(item);
+
+            sc.close();
             while ((linha = bw.readLine()) != null) {
                 sc = new Scanner(linha).useDelimiter("[|]");
                 numero = sc.next();
@@ -65,24 +79,28 @@ public class Leitura {
                 if (!notaAnterior.equals(notaAtual)) {
                     nf = new NotaFiscal();
                     nf.setNumero(numero);
-                    nf.setCliente(cliente);
                     nf.setData(data);
+                    nf.setCliente(cliente);
+                    nf.setCnpjCpf(cpf);
+                    nf.setEndereco(end);
+                    nf.setCidade(cidade);
+                    nf.setEstado(estado);
+                    lista = new ListaItemNotaFiscal();
                     nf.setItens(lista);
                     listaNf.adicionar(nf);
-                    notaAnterior = numero;
+                    notaAnterior = notaAtual;
                 }
-                String numeroItem = sc.next();
-                String descricao = sc.next();
-                int quantidadeItem = sc.nextInt();
-                double valorUnitario = sc.nextDouble();
-                ItemNotaFiscal item = new ItemNotaFiscal(numeroItem, descricao, quantidadeItem, valorUnitario);
+                numeroItem = sc.next();
+                descricao = sc.next();
+                quantidadeItem = sc.nextInt();
+                valorUnitario = sc.nextDouble();
+                item = new ItemNotaFiscal(numeroItem, descricao, quantidadeItem, valorUnitario);
                 lista.adicionar(item);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(listaNf.getQuantidade());;
-        listaNf.imprimirLista();
+        System.out.println(listaNf.toString());
     }
 
 }

@@ -36,22 +36,13 @@ public class ListaItemNotaFiscal {
         quantidade++;
     }
 
-    public int buscar(String chave) {
-        int posicao = 0;
-        for(Nodo n = this.inicio; n!=null; n = n.proximo) {
-            if(n.item.equals(chave)) return posicao;
-            posicao++;
-        }
-        return -1; //nao existe
-    }
     @Override
     public String toString() {
-        if(this.quantidade==0) return "[]";
-        String str = "[";
+        if(estaVazia()) return "[]";
+        String str = "";
         for(Nodo n = this.inicio; n!=null; n = n.proximo) {
-            str = str + " " + n.item + " ";
+            str = str + " " + n.item + "\n";
         }
-        str = str + "] n = " + this.quantidade + " (inicio = " + this.inicio.item + ") (fim = " + this.fim.item + ")";
         return str;
     }
 
