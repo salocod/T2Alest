@@ -1,0 +1,100 @@
+Nota: 1
+Data: 1977-09-04
+Cliente: Oliveira S/A
+CPF: 30.872.491/0001-21
+Endereco: Estrada Sales
+Cidade: Alves
+Estado: PR
+Lista: 
+ ItemNotaFiscal{itemNumero='1', descricao='maximize front-end systems', quantidade=9, valorUnitario=36.18, proximo=null}
+ ItemNotaFiscal{itemNumero='2', descricao='integrate leading-edge ROI', quantidade=7, valorUnitario=99.01, proximo=null}
+ ItemNotaFiscal{itemNumero='3', descricao='transform interactive models', quantidade=1, valorUnitario=83.55, proximo=null}
+
+
+Nota: 2
+Data: 1994-11-06
+Cliente: Campos
+CPF: 48.361.725/0001-31
+Endereco: Avenida Elisa da Cunha, 80
+Cidade: Araújo
+Estado: MT
+Lista: 
+ ItemNotaFiscal{itemNumero='1', descricao='grow user-centric methodologies', quantidade=8, valorUnitario=53.0, proximo=null}
+
+
+Nota: 3
+Data: 2006-08-18
+Cliente: Vieira
+CPF: 17.320.965/0001-64
+Endereco: Trecho Gustavo Gomes, 7
+Cidade: Dias
+Estado: PA
+Lista: 
+ ItemNotaFiscal{itemNumero='1', descricao='benchmark cross-platform bandwidth', quantidade=8, valorUnitario=82.28, proximo=null}
+
+
+Nota: 4
+Data: 2013-06-06
+Cliente: Costa
+CPF: 45.387.910/0001-07
+Endereco: Distrito Novaes, 6
+Cidade: Lopes
+Estado: SC
+Lista: 
+ ItemNotaFiscal{itemNumero='1', descricao='monetize end-to-end technologies', quantidade=1, valorUnitario=96.3, proximo=null}
+
+
+Nota: 5
+Data: 1983-08-27
+Cliente: Barbosa S/A
+CPF: 30.726.951/0001-03
+Endereco: Lago de Ramos, 6
+Cidade: Costela da Serra
+Estado: PI
+Lista: 
+ ItemNotaFiscal{itemNumero='1', descricao='target one-to-one bandwidth', quantidade=6, valorUnitario=48.41, proximo=null}
+ ItemNotaFiscal{itemNumero='2', descricao='deliver frictionless synergies', quantidade=5, valorUnitario=98.6, proximo=null}
+ ItemNotaFiscal{itemNumero='3', descricao='harness robust ROI', quantidade=4, valorUnitario=16.21, proximo=null}
+ ItemNotaFiscal{itemNumero='4', descricao='evolve distributed systems', quantidade=3, valorUnitario=56.88, proximo=null}
+ ItemNotaFiscal{itemNumero='5', descricao='engineer plug-and-play web-readiness', quantidade=2, valorUnitario=66.37, proximo=null}
+
+
+Nota: 6
+Data: 1972-05-14
+Cliente: da Mata Barbosa - ME
+CPF: 94.803.725/0001-61
+Endereco: Avenida Mariane Rocha, 926
+Cidade: Rodrigues
+Estado: RJ
+Lista: 
+ ItemNotaFiscal{itemNumero='1', descricao='transform extensible content', quantidade=9, valorUnitario=65.71, proximo=null}
+ ItemNotaFiscal{itemNumero='2', descricao='optimize clicks-and-mortar e-services', quantidade=4, valorUnitario=77.96, proximo=null}
+ ItemNotaFiscal{itemNumero='3', descricao='facilitate collaborative initiatives', quantidade=10, valorUnitario=86.52, proximo=null}
+ ItemNotaFiscal{itemNumero='4', descricao='utilize dot-com interfaces', quantidade=10, valorUnitario=18.19, proximo=null}
+
+
+Nota: 7
+Data: 2011-09-26
+Cliente: Nogueira - ME
+CPF: 47.056.329/0001-38
+Endereco: Conjunto Martins, 78
+Cidade: Freitas Paulista
+Estado: GO
+Lista: 
+ ItemNotaFiscal{itemNumero='1', descricao='transition out-of-the-box web services', quantidade=1, valorUnitario=57.42, proximo=null}
+ ItemNotaFiscal{itemNumero='2', descricao='empower efficient interfaces', quantidade=6, valorUnitario=69.6, proximo=null}
+
+
+Nota: 8
+Data: 1997-05-01
+Cliente: Rezende Costa e Filhos
+CPF: 31.879.625/0001-07
+Endereco: Estação de Teixeira, 3
+Cidade: da Costa
+Estado: PR
+Lista: 
+ ItemNotaFiscal{itemNumero='1', descricao='incubate dot-com e-business', quantidade=6, valorUnitario=24.09, proximo=null}
+ ItemNotaFiscal{itemNumero='2', descricao='facilitate e-business paradigms', quantidade=8, valorUnitario=41.96, proximo=null}
+
+
+Quantidade: 8

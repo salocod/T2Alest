@@ -60,8 +60,7 @@ public class ListaNotaFiscal {
             fim.anterior = n;
             quantidade++;
     }
-    //Numero_NF|Data_NF|Cliente|CNPJ_CPF|Endereco|Cidade|Estado
-    //Item|Descricao|Qtd|Valor_Unitario
+    
     @Override
     public String toString() {
         String r = "";
