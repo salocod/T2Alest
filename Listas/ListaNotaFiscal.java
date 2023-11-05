@@ -46,37 +46,58 @@ public class ListaNotaFiscal {
         quantidade++; // Incrementa a quantidade de nodos na lista.
     }
 
-    public void sort() {
-        if (inicio.proximo != fim) { // Check if the list has more than 0 elements.
-            inicio.proximo = mergeSort(inicio.proximo, fim);
-            Nodo last = inicio;
-            while (last.proximo != fim) { // Re-establish the connections with sentinel nodes.
-                last.proximo.anterior = last;
-                last = last.proximo;
-            }
-            fim.anterior = last;
-            last.proximo = fim;
+    public Nodo sort() {
+        if (inicio.proximo == fim) {
+            return inicio;
         }
+    
+        // Start from the first real node.
+        inicio.proximo = mergeSort(inicio.proximo);
+        // After sorting, make sure to re-establish the sentinel nodes correctly.
+        // Find the new start and end of the list and connect them to the sentinel nodes.
+        Nodo current = inicio.proximo;
+        while (current.proximo != null) {
+            current = current.proximo;
+        }
+        inicio.proximo.anterior = inicio;
+        fim.anterior = current;
+        current.proximo = fim;
+    
+        return inicio.proximo;
+    }
+    
+
+    public Nodo mergeSort(Nodo dNodo) {
+        if (dNodo == null || dNodo.proximo == null) {
+            return dNodo;
+        }
+
+        Nodo mid = getMidNodo(dNodo);
+        Nodo proximo = mid.proximo;
+        mid.proximo = null;
+
+        Nodo l1 = mergeSort(dNodo);
+        Nodo l2 = mergeSort(proximo);
+
+        return merge(l1, l2);
     }
 
-    private Nodo mergeSort(Nodo start, Nodo end) {
-        if (start == end || start.proximo == end) { // If the list is empty or has only one element.
-            return start;
-        }
-        Nodo mid = getMidNodo(start, end);
-        Nodo secondHalfStart = mid.proximo;
-        mid.proximo = end; // Disconnect the two halves.
+    private Nodo merge(Nodo list1, Nodo list2) {
+        // Dummy node to help with the merge process.
+        Nodo dummy = new Nodo(null);
+        Nodo current = dummy;
     
-        Nodo left = mergeSort(start, mid);
-        Nodo right = mergeSort(secondHalfStart, end);
+        while (list1 != null && list2 != null) {
+            // Skip sentinel nodes or nodes with null items.
+            if (list1.item == null) {
+                list1 = list1.proximo;
+                continue;
+            }
+            if (list2.item == null) {
+                list2 = list2.proximo;
+                continue;
+            }
     
-        return merge(left, right, end);
-    }
-    private Nodo merge(Nodo list1, Nodo list2, Nodo end) {
-        Nodo dummyHead = new Nodo(null);
-        Nodo current = dummyHead;
-    
-        while (list1 != end && list2 != end) {
             if (list1.item.getData().compareTo(list2.item.getData()) < 0) {
                 current.proximo = list1;
                 list1.anterior = current;
@@ -89,31 +110,21 @@ public class ListaNotaFiscal {
             current = current.proximo;
         }
     
-        while (list1 != end) {
-            current.proximo = list1;
-            list1.anterior = current;
-            list1 = list1.proximo;
-            current = current.proximo;
+        // Attach the remaining part of the list, if any.
+        current.proximo = (list1 == null) ? list2 : list1;
+        if (current.proximo != null) {
+            current.proximo.anterior = current;
         }
     
-        while (list2 != end) {
-            current.proximo = list2;
-            list2.anterior = current;
-            list2 = list2.proximo;
-            current = current.proximo;
-        }
-    
-        current.proximo = end; // Reconnect the last part of the list.
-        end.anterior = current;
-    
-        return dummyHead.proximo;
+        // Return the sorted list, skipping the dummy node.
+        return dummy.proximo;
     }
     
-    
-    private Nodo getMidNodo(Nodo start, Nodo end) {
-        Nodo slow = start;
-        Nodo fast = start;
-        while (fast != end && fast.proximo != end) {
+
+    public Nodo getMidNodo(Nodo Nodo) {
+        Nodo slow = Nodo;
+        Nodo fast = Nodo;
+        while (fast.proximo != null && fast.proximo.proximo != null) {
             slow = slow.proximo;
             fast = fast.proximo.proximo;
         }
@@ -124,17 +135,10 @@ public class ListaNotaFiscal {
     @Override
     public String toString() {
         String r = "";
-        // Começa do próximo nodo após o início e vai até o nodo anterior ao fim.
         for (Nodo n = inicio.proximo; n != fim; n = n.proximo) {
-            if (n.item != null) { // Verifica se o item não é nulo antes de acessar seus métodos.
+            if (n.item != null) {
                 r = r + "Nota: " + n.item.getNumero() +
                  "\nData: " + n.item.getData() +
-                 "\nCliente: " + n.item.getCliente() +
-                 "\nCPF: " + n.item.getCnpjCpf() +
-                 "\nEndereco: " + n.item.getEndereco() +
-                 "\nCidade: " + n.item.getCidade() +
-                 "\nEstado: " + n.item.getEstado() +
-                  "\nLista: \n" + n.item.getItens().toString() +
                    "\n\n";
             }
         }

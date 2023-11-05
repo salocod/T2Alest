@@ -18,7 +18,7 @@ public class Leitura {
 
     public Leitura() {
         try {
-            bw = new BufferedReader(new FileReader("notas_fiscais_10.csv"));
+            bw = new BufferedReader(new FileReader("notas_fiscais_50.csv"));
             PrintStream pw = new PrintStream(new File("saida.csv"));
             System.setOut(pw);
         } catch (Exception e) {
