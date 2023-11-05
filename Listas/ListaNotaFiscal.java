@@ -31,19 +31,18 @@ public class ListaNotaFiscal {
     public void adicionar(NotaFiscal item) {
         Nodo n = new Nodo(item);
         if (quantidade == 0) {
-            // Se a lista está vazia, o novo nodo é inserido após o início.
+
             inicio.proximo = n;
             n.anterior = inicio;
-            n.proximo = fim; // O novo nodo aponta para o fim.
+            n.proximo = fim;
             fim.anterior = n;
         } else {
-            // O novo nodo é inserido antes do fim da lista.
             n.proximo = fim;
             n.anterior = fim.anterior;
             fim.anterior.proximo = n;
             fim.anterior = n;
         }
-        quantidade++; // Incrementa a quantidade de nodos na lista.
+        quantidade++;
     }
 
     public Nodo sort() {
@@ -51,17 +50,14 @@ public class ListaNotaFiscal {
             return inicio;
         }
     
-        // Start from the first real node.
         inicio.proximo = mergeSort(inicio.proximo);
-        // After sorting, make sure to re-establish the sentinel nodes correctly.
-        // Find the new start and end of the list and connect them to the sentinel nodes.
-        Nodo current = inicio.proximo;
-        while (current.proximo != null) {
-            current = current.proximo;
+        Nodo atual = inicio.proximo;
+        while (atual.proximo != null) {
+            atual = atual.proximo;
         }
         inicio.proximo.anterior = inicio;
-        fim.anterior = current;
-        current.proximo = fim;
+        fim.anterior = atual;
+        atual.proximo = fim;
     
         return inicio.proximo;
     }
@@ -83,12 +79,10 @@ public class ListaNotaFiscal {
     }
 
     private Nodo merge(Nodo list1, Nodo list2) {
-        // Dummy node to help with the merge process.
-        Nodo dummy = new Nodo(null);
-        Nodo current = dummy;
+        Nodo suporte = new Nodo(null);
+        Nodo atual = suporte;
     
         while (list1 != null && list2 != null) {
-            // Skip sentinel nodes or nodes with null items.
             if (list1.item == null) {
                 list1 = list1.proximo;
                 continue;
@@ -99,25 +93,23 @@ public class ListaNotaFiscal {
             }
     
             if (list1.item.getData().compareTo(list2.item.getData()) < 0) {
-                current.proximo = list1;
-                list1.anterior = current;
+                atual.proximo = list1;
+                list1.anterior = atual;
                 list1 = list1.proximo;
             } else {
-                current.proximo = list2;
-                list2.anterior = current;
+                atual.proximo = list2;
+                list2.anterior = atual;
                 list2 = list2.proximo;
             }
-            current = current.proximo;
+            atual = atual.proximo;
         }
     
-        // Attach the remaining part of the list, if any.
-        current.proximo = (list1 == null) ? list2 : list1;
-        if (current.proximo != null) {
-            current.proximo.anterior = current;
+        atual.proximo = (list1 == null) ? list2 : list1;
+        if (atual.proximo != null) {
+            atual.proximo.anterior = atual;
         }
     
-        // Return the sorted list, skipping the dummy node.
-        return dummy.proximo;
+        return suporte.proximo;
     }
     
 
@@ -139,11 +131,18 @@ public class ListaNotaFiscal {
             if (n.item != null) {
                 r = r + "Nota: " + n.item.getNumero() +
                  "\nData: " + n.item.getData() +
+                 "\nCliente: " + n.item.getCliente() +
+                 "\nCPF: " + n.item.getCnpjCpf() +
+                 "\nEndereco: " + n.item.getEndereco() +
+                 "\nCidade: " + n.item.getCidade() +
+                 "\nEstado: " + n.item.getEstado() +
+                  "\nLista: \n" + n.item.getItens().toString() +
                    "\n\n";
             }
         }
         return r + "Quantidade: " + quantidade;
     }
+
     
 
     public void imprimir() {System.out.println(toString());}
