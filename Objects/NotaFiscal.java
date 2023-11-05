@@ -15,6 +15,12 @@ public class NotaFiscal {
     public NotaFiscal proximo;
     public NotaFiscal anterior;
 
+    public NotaFiscal(Date data) {
+        this.data = data;
+    }
+
+    public NotaFiscal() {}
+
     public String getNumero() {
         return numero;
     }
