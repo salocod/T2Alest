@@ -41,10 +41,23 @@ public class ListaItemNotaFiscal {
         if(estaVazia()) return "[]";
         String str = "";
         for(Nodo n = this.inicio; n!=null; n = n.proximo) {
-            str = str + " " + n.item + "\n";
+            str += "\n  Item: " + n.item.getItemNumero() +
+            "\n  Descricao: " + n.item.getDescricao() +
+            "\n  Quantidade: " + n.item.getQuantidade() +
+            "\n  Valor Unitario: " + String.format("%.2f", n.item.getValorTotalItem()) + "\n";
         }
-        return str;
+        return str + "\n  Valor total: " + String.format("%.2f", getSomatorioItens()) +
+        "\n  Quantidade itens: " + getQuantidade() + "\n";
     }
 
+    public double getSomatorioItens() {
+            double soma = 0.0;
+            for(Nodo n = this.inicio; n!=null; n = n.proximo) {
+                soma += n.item.getValorTotalItem();
+            }
+            return soma;
+    }
+
+    public int getQuantidade() {return quantidade;}
     public boolean estaVazia() {return quantidade==0;}
 }

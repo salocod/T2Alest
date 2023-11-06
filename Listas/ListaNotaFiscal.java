@@ -48,7 +48,7 @@ public class ListaNotaFiscal {
         if (inicio.proximo == fim) {
             return inicio;
         }
-    
+
         inicio.proximo = mergeSort(inicio.proximo);
         Nodo atual = inicio.proximo;
         while (atual.proximo != null) {
@@ -57,10 +57,9 @@ public class ListaNotaFiscal {
         inicio.proximo.anterior = inicio;
         fim.anterior = atual;
         atual.proximo = fim;
-    
+
         return inicio.proximo;
     }
-    
 
     public Nodo mergeSort(Nodo dNodo) {
         if (dNodo == null || dNodo.proximo == null) {
@@ -80,7 +79,7 @@ public class ListaNotaFiscal {
     private Nodo merge(Nodo list1, Nodo list2) {
         Nodo suporte = new Nodo(null);
         Nodo atual = suporte;
-    
+
         while (list1 != null && list2 != null) {
             if (list1.item == null) {
                 list1 = list1.proximo;
@@ -90,7 +89,7 @@ public class ListaNotaFiscal {
                 list2 = list2.proximo;
                 continue;
             }
-    
+
             if (list1.item.getData().compareTo(list2.item.getData()) < 0) {
                 atual.proximo = list1;
                 list1.anterior = atual;
@@ -102,12 +101,12 @@ public class ListaNotaFiscal {
             }
             atual = atual.proximo;
         }
-    
+
         atual.proximo = (list1 == null) ? list2 : list1;
         if (atual.proximo != null) {
             atual.proximo.anterior = atual;
         }
-    
+
         return suporte.proximo;
     }
 
@@ -127,39 +126,94 @@ public class ListaNotaFiscal {
         for (Nodo n = inicio.proximo; n != fim; n = n.proximo) {
             if (n.item != null) {
                 r = r + "Nota: " + n.item.getNumero() +
-                 "\nData: " + n.item.getData() +
-                 "\nCliente: " + n.item.getCliente() +
-                 "\nCPF: " + n.item.getCnpjCpf() +
-                 "\nEndereco: " + n.item.getEndereco() +
-                 "\nCidade: " + n.item.getCidade() +
-                 "\nEstado: " + n.item.getEstado() +
-                  "\nLista: \n" + n.item.getItens().toString() +
-                   "\n\n";
+                        "\nData: " + n.item.getData() +
+                        "\nCliente: " + n.item.getCliente() +
+                        "\nCPF: " + n.item.getCnpjCpf() +
+                        "\nEndereco: " + n.item.getEndereco() +
+                        "\nCidade: " + n.item.getCidade() +
+                        "\nEstado: " + n.item.getEstado() +
+                        "\nLista: \n" + n.item.getItens().toString() +
+                        "\n\n";
             }
         }
         return r + "Quantidade: " + quantidade;
     }
 
     public void consultarNota(int notaFiscal) {
-        Nodo suporte = inicio;
-        while(suporte != null) {
-            if(notaFiscal == Integer.parseInt(suporte.item.getNumero())) {
+        Nodo suporte = inicio.proximo;
+        while (suporte != null) {
+            // Verifique se o item não é nulo antes de tentar acessá-lo
+            if (suporte.item != null && notaFiscal == Integer.parseInt(suporte.item.getNumero())) {
                 System.out.println("Nota: " + suporte.item.getNumero() +
-                 "\nData: " + suporte.item.getData() +
-                 "\nCliente: " + suporte.item.getCliente() +
-                 "\nCPF: " + suporte.item.getCnpjCpf() +
-                 "\nEndereco: " + suporte.item.getEndereco() +
-                 "\nCidade: " + suporte.item.getCidade() +
-                 "\nEstado: " + suporte.item.getEstado() +
-                  "\nLista: \n" + suporte.item.getItens().toString());
-                  return;
+                        "\nData: " + suporte.item.getData() +
+                        "\nCliente: " + suporte.item.getCliente() +
+                        "\nCPF: " + suporte.item.getCnpjCpf() +
+                        "\nEndereco: " + suporte.item.getEndereco() +
+                        "\nCidade: " + suporte.item.getCidade() +
+                        "\nEstado: " + suporte.item.getEstado() +
+                        "\nLista: " + suporte.item.getItens().toString());
+                return;
             }
             suporte = suporte.proximo;
         }
         System.out.println("Numero nao encontrado!");
     }
 
-    public NotaFiscal getPrimeiraNota() {return inicio.item;}
-    public void imprimir() {System.out.println(toString());}
+    public NotaFiscal getNotaMaisCara() {
+        Nodo suporte = inicio.proximo;
+        NotaFiscal escolhido = null;
+        double checkMax = Double.MIN_VALUE;
+        while (suporte != null) {
+            if (suporte.item != null) {
+                double somatorioItens = suporte.item.getItens().getSomatorioItens();
+                if (suporte.item.getItens().getSomatorioItens() > checkMax) {
+                    checkMax = somatorioItens;
+                    escolhido = suporte.item;
+                }
+            }
+            suporte = suporte.proximo;
+        }
+        return escolhido;
+    }
+
+    public NotaFiscal getNotaMaisBarata() {
+        Nodo suporte = inicio.proximo;
+        NotaFiscal escolhido = null;
+        double checkMin = Double.MAX_VALUE;
+        while (suporte != null) {
+            if (suporte.item != null) {
+                double somatorioItens = suporte.item.getItens().getSomatorioItens();
+                if (suporte.item.getItens().getSomatorioItens() < checkMin) {
+                    checkMin = somatorioItens;
+                    escolhido = suporte.item;
+                }
+            }
+            suporte = suporte.proximo;
+        }
+        return escolhido;
+    }
+
+    public NotaFiscal getNotaMaisItens() {
+        Nodo suporte = inicio.proximo;
+        NotaFiscal escolhido = null;
+        int check = 0;
+        while (suporte != null) {{
+                if (suporte.item != null && suporte.item.getItens().getQuantidade() > check) {
+                    check = suporte.item.getItens().getQuantidade();
+                    escolhido = suporte.item;
+                }
+                suporte = suporte.proximo;
+        }
+        }
+        return escolhido;
+    }
+
+    public NotaFiscal getPrimeiraNota() {
+        return inicio.item;
+    }
+
+    public void imprimir() {
+        System.out.println(toString());
+    }
 
 }

@@ -1,9 +1,7 @@
 package App;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.io.PrintStream;
 import java.sql.Date;
 import java.util.Scanner;
 
@@ -18,9 +16,7 @@ public class Leitura {
 
     public Leitura() {
         try {
-            bw = new BufferedReader(new FileReader("notas_fiscais_50.csv"));
-            PrintStream pw = new PrintStream(new File("saida.csv"));
-            System.setOut(pw);
+            bw = new BufferedReader(new FileReader("notas_fiscais_1.csv"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,10 +97,38 @@ public class Leitura {
             e.printStackTrace();
         }
         listaNf.sort();
+        Scanner sc = new Scanner(System.in);
         menu();
+        int opcao = sc.nextInt();
+        while(true) {
+            switch(opcao) {
+                case 0 -> {sc.close();break;}
+                case 1 -> {
+                    System.out.println("Insira o numero desejado");
+                    listaNf.consultarNota(sc.nextInt());
+                }
+                case 2 -> {
+                    System.out.println("\nNota mais cara: " + listaNf.getNotaMaisCara().getNumero());
+                    System.out.println("Preco: " + String.format("%.2f", listaNf.getNotaMaisCara().getItens().getSomatorioItens()) + "\n");
+                }
+                case 3 -> {
+                    System.out.println("\nNota mais barata: " + listaNf.getNotaMaisBarata().getNumero());
+                    System.out.println("Preco: " + String.format("%.2f", listaNf.getNotaMaisBarata().getItens().getSomatorioItens()) + "\n");
+                }
+                case 4 -> {
+                    System.out.println("\nNota com mais itens: " + listaNf.getNotaMaisItens().getNumero());
+                    System.out.println("Quantidade: " + listaNf.getNotaMaisItens().getItens().getQuantidade() + "\n");
+                }
+                case 5 -> {System.out.println(listaNf.toString());}
+            }
+            menu();
+            opcao = sc.nextInt();
+        }
+
     }
 
     private void menu() {
+        System.out.println("Selecione a opcao desejada: ");
         System.out.println("[1] Consultar dados Nota Fiscal");
         System.out.println("[2] Exibir Nota Fiscal mais cara");
         System.out.println("[3] Exibir Nota Fiscal mais barata");
