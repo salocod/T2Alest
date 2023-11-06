@@ -31,7 +31,6 @@ public class ListaNotaFiscal {
     public void adicionar(NotaFiscal item) {
         Nodo n = new Nodo(item);
         if (quantidade == 0) {
-
             inicio.proximo = n;
             n.anterior = inicio;
             n.proximo = fim;
@@ -68,9 +67,9 @@ public class ListaNotaFiscal {
             return dNodo;
         }
 
-        Nodo mid = getMidNodo(dNodo);
-        Nodo proximo = mid.proximo;
-        mid.proximo = null;
+        Nodo meio = getMidNodo(dNodo);
+        Nodo proximo = meio.proximo;
+        meio.proximo = null;
 
         Nodo l1 = mergeSort(dNodo);
         Nodo l2 = mergeSort(proximo);
@@ -111,7 +110,6 @@ public class ListaNotaFiscal {
     
         return suporte.proximo;
     }
-    
 
     public Nodo getMidNodo(Nodo Nodo) {
         Nodo slow = Nodo;
@@ -122,7 +120,6 @@ public class ListaNotaFiscal {
         }
         return slow;
     }
-    
 
     @Override
     public String toString() {
@@ -143,8 +140,26 @@ public class ListaNotaFiscal {
         return r + "Quantidade: " + quantidade;
     }
 
-    
+    public void consultarNota(int notaFiscal) {
+        Nodo suporte = inicio;
+        while(suporte != null) {
+            if(notaFiscal == Integer.parseInt(suporte.item.getNumero())) {
+                System.out.println("Nota: " + suporte.item.getNumero() +
+                 "\nData: " + suporte.item.getData() +
+                 "\nCliente: " + suporte.item.getCliente() +
+                 "\nCPF: " + suporte.item.getCnpjCpf() +
+                 "\nEndereco: " + suporte.item.getEndereco() +
+                 "\nCidade: " + suporte.item.getCidade() +
+                 "\nEstado: " + suporte.item.getEstado() +
+                  "\nLista: \n" + suporte.item.getItens().toString());
+                  return;
+            }
+            suporte = suporte.proximo;
+        }
+        System.out.println("Numero nao encontrado!");
+    }
 
+    public NotaFiscal getPrimeiraNota() {return inicio.item;}
     public void imprimir() {System.out.println(toString());}
 
 }

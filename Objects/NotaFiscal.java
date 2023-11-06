@@ -15,10 +15,6 @@ public class NotaFiscal {
     public NotaFiscal proximo;
     public NotaFiscal anterior;
 
-    public NotaFiscal(Date data) {
-        this.data = data;
-    }
-
     public NotaFiscal() {}
 
     public String getNumero() {
@@ -83,21 +79,5 @@ public class NotaFiscal {
 
     public void setItens(ListaItemNotaFiscal itens) {
         this.itens = itens;
-    }
-
-    public NotaFiscal getProximo() {
-        return proximo;
-    }
-
-    public void setProximo(NotaFiscal proximo) {
-        this.proximo = proximo;
-    }
-
-    public NotaFiscal getAnterior() {
-        return anterior;
-    }
-
-    public void setAnterior(NotaFiscal anterior) {
-        this.anterior = anterior;
     }
 }

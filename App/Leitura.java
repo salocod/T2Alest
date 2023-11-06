@@ -101,10 +101,17 @@ public class Leitura {
             e.printStackTrace();
         }
         listaNf.sort();
-        listaNf.imprimir();
+        menu();
     }
 
-
+    private void menu() {
+        System.out.println("[1] Consultar dados Nota Fiscal");
+        System.out.println("[2] Exibir Nota Fiscal mais cara");
+        System.out.println("[3] Exibir Nota Fiscal mais barata");
+        System.out.println("[4] Exibir Nota Fiscal com mais itens");
+        System.out.println("[5] Exibir todas Notas Fiscais");
+        System.out.println("[0] Sair");
+    }
     
 
 }
